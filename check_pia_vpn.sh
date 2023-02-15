@@ -1,6 +1,7 @@
 #!/bin/bash
-# Copyright 2023 Adrian Robinson <adrian dot j dot robinson at gmail dot com>
-# https://github.com/transilluminate/check-pia-vpn
+# Copyright 2023 Adrian Robinson
+# email: $ echo YWRyaWFuIGRvdCBqIGRvdCByb2JpbnNvbiBhdCBnbWFpbCBkb3QgY29tCg== | base64 --decode
+# github: https://github.com/transilluminate/check-pia-vpn
 
 PIA_LOCATION_INFO_URL="https://www.privateinternetaccess.com/site-api/get-location-info"
 PIA_EXPOSED_CHECK_URL="https://www.privateinternetaccess.com/site-api/exposed-check"
