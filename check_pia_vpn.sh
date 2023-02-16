@@ -30,13 +30,20 @@ if [[ -t 1 ]]; then
   fi
 fi
 
+# get IP geolocation info using PIA's 'get-location-info' API (note: could use another service)
 locationInfoJSON=$(curl -s $PIA_LOCATION_INFO_URL)
+
 if [[ $DEBUG == "true" ]]; then echo "External IP location information:" ; echo $locationInfoJSON | jq; fi
 
+# get our externally facing IP address
 ipAddress=$(echo $locationInfoJSON | jq -r '.ip')
+
 if [[ $DEBUG == "true" ]]; then echo -n "Checking external IP address ($ipAddress)... "; fi
 
+# post the external IP address to PIA's 'exposed-check' API
 isExposed=$(curl -s -X POST -H "Content-Type: application/json" -d '{"ipAddress": "'${ipAddress}'"}' $PIA_EXPOSED_CHECK_URL | jq -r '.status')
+
+# fails safely - i.e. if there's an error, will not say you're protected
 if [[ $isExposed == 'false' ]]; then
   echo "${green}true${nc}"; exit 0
 else
